@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://anderson-adm.github.io/data-engineer-portfolio-site/sitemap.xml

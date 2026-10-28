@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Risk &amp; Liquidity Platform — Case · Anderson Nascimento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#101119}
+.theme-dark{--bg:#101119;--hero:#181923;--panel:#161720;--card:#191B27;--inner:#141620;--border:#2A2C3A;--line:#262838;--border3:#34364A;--dash2:#4A4C60;--dash:#6B6E85;--text:#EDEEF3;--text2:#C4C7D4;--body:#B4B8C6;--text3:#A9ADBD;--accent:#BFA5FF;--green:#5ED39A;--teal:#7FD8CA;--arrow-bg:#EDEEF3;--arrow-fg:#14121F;--hover-border:#6E5FA8;--t1:#26243B;--t2:#1B3032;--t3:#34282E;--t4:#22293B;--t5:#2B2A1F;--t6:#2E2236;color-scheme:dark}
+.theme-light{--bg:#F4F3EF;--hero:#FBFAF7;--panel:#F6F5F1;--card:#FFFFFF;--inner:#F5F4F0;--border:#E3E1DB;--line:#E7E5DF;--border3:#D5D2CA;--dash2:#B8B5AD;--dash:#A9A69E;--text:#18181D;--text2:#3F4049;--body:#50515B;--text3:#62636D;--accent:#6A4FD6;--green:#1E9E5E;--teal:#0E7C6C;--arrow-bg:#1B1C24;--arrow-fg:#FFFFFF;--hover-border:#B9A8F2;--t1:#ECE7FB;--t2:#E2F0EE;--t3:#F6EAE6;--t4:#E5EAF6;--t5:#F2EFDF;--t6:#F2E8F5;color-scheme:light}
+.theme-light .ic,.theme-light img.lift{box-shadow:0 3px 10px rgba(30,25,20,.12) !important}
+.theme-light .lift:hover{box-shadow:0 8px 18px rgba(30,25,20,.16) !important}
+.theme-light .pcard:hover{box-shadow:0 14px 30px rgba(30,25,20,.10)}
+a{color:var(--text)}a:hover{color:var(--accent)}
+.ic{display:block;width:36px;height:36px;border-radius:9px;background-image:url(../assets/stack-sprite.png);background-repeat:no-repeat;background-size:720px 36px;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.ic-python{background-position:0px 0}.ic-sql{background-position:-36px 0}.ic-pyspark{background-position:-72px 0}.ic-bash{background-position:-108px 0}.ic-terraform{background-position:-144px 0}.ic-dbt{background-position:-180px 0}.ic-airflow{background-position:-216px 0}.ic-docker{background-position:-252px 0}.ic-metabase{background-position:-288px 0}.ic-cicd{background-position:-324px 0}.ic-postgres{background-position:-360px 0}.ic-mongodb{background-position:-396px 0}.ic-aurora{background-position:-432px 0}.ic-rds{background-position:-468px 0}.ic-sqlserver{background-position:-504px 0}.ic-aws{background-position:-540px 0}.ic-s3{background-position:-576px 0}.ic-lambda{background-position:-612px 0}.ic-glue{background-position:-648px 0}.ic-athena{background-position:-684px 0}
+.lift{transition:transform .18s ease,box-shadow .18s ease}.lift:hover{transform:translateY(-3px) !important;box-shadow:0 10px 20px rgba(0,0,0,.45) !important}
+.pcard{transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}.pcard:hover{transform:translateY(-4px);border-color:var(--hover-border) !important;box-shadow:0 14px 30px rgba(0,0,0,.35)}
+.track{scrollbar-width:none}.track::-webkit-scrollbar{display:none}
+@media (max-width: 860px){.case-h1{font-size:40px !important}}
+.dgrid{background-color:#12131B;background-image:radial-gradient(#2A2C3A 1px, transparent 1px);background-size:16px 16px}
+:focus-visible{outline:2px solid var(--accent,#BFA5FF);outline-offset:3px}
+@media (prefers-reduced-motion: reduce){html,.track{scroll-behavior:auto !important}.lift,.pcard,.theme-dark,.theme-light{transition:none !important}.lift:hover,.pcard:hover{transform:none !important}}
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23181923'/%3E%3Cpath d='M24 20 12 32l12 12M40 20l12 12-12 12M35 16l-6 32' fill='none' stroke='%23BFA5FF' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta name="description" content="Case: plataforma de dados na AWS para risco, liquidez e enquadramento no mercado financeiro.">
+</head>
+<body>
+<div class="theme-dark" style="min-height: 100vh; background: var(--bg); color: var(--text); font-family: 'Geist', system-ui, sans-serif;">
+<div style="max-width: 1400px; margin: 0 auto; padding: 0 32px 64px; box-sizing: border-box;">
+
+<header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 6px 0; border-bottom: 1px solid var(--line);">
+<a href="../index.html" style="display: flex; align-items: center; gap: 8px; min-height: 36px; font-size: 14px; text-decoration: none; color: var(--text2);">
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+Voltar aos projetos
+</a>
+</header>
+<main>
+
+<section style="padding: 18px 0 18px; display: flex; flex-direction: column; gap: 8px; border-bottom: 1px solid var(--line);">
+<span style="display: flex; align-items: center; gap: 10px; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: var(--text);">
+<span style="width: 6px; height: 6px; border-radius: 50%; background: var(--green);"></span>
+CASE 01/03 · MERCADO FINANCEIRO · PLATAFORMA DE DADOS
+</span>
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
+<h1 class="case-h1" style="margin: 0; font-size: 30px; line-height: 1.1; letter-spacing: -0.04em; font-weight: 600;">Risk &amp; Liquidity Platform</h1>
+</div>
+</section>
+
+<section style="padding: 24px 0 0; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px;">
+<h2 style="margin: 0; font-size: 22px; line-height: 1.2; font-weight: 600; letter-spacing: -0.04em;">O desafio</h2>
+<span aria-hidden="true" style="width: 22px; height: 1px; background: var(--dash2);"></span>
+<span style="font-size: 15px; line-height: 1.4; color: var(--text2);">Dados semanais e incompletos, sem fonte única</span>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--body); text-align: justify; hyphens: auto;">No mercado financeiro, risco, liquidez e enquadramento dependem de dados que precisam estar corretos e no horário. Aqui eles vinham de sete fontes com formatos, volumes e janelas diferentes: bancos operacionais, uma base legada na casa dos terabytes, dados de mercado e arquivos XML. Sem uma base única, conciliar os dados e gerar o relatório levava cerca de uma semana, e ainda assim ele cobria só liquidez, deixando enquadramento de fora. Nesse cenário, surgiu a urgência de integrar um novo software de controle e relatórios regulatórios, que precisaria ser alimentado por todas essas fontes.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px;">
+<div style="flex: 1 1 210px; min-width: 0; padding: 10px 14px; border-radius: 12px; background: #221923; border: 1px solid #4A2D40; display: flex; gap: 10px; align-items: flex-start;">
+<span style="flex: none; margin-top: 6px; width: 7px; height: 7px; border-radius: 50%; background: #E67AAE;"></span>
+<span style="font-size: 14px; line-height: 1.45; color: var(--body);"><b style="color: var(--text); font-weight: 600;">Uma semana para conciliar</b><br>processo manual e sujeito a erro</span>
+</div>
+<div style="flex: 1 1 210px; min-width: 0; padding: 10px 14px; border-radius: 12px; background: #221923; border: 1px solid #4A2D40; display: flex; gap: 10px; align-items: flex-start;">
+<span style="flex: none; margin-top: 6px; width: 7px; height: 7px; border-radius: 50%; background: #E67AAE;"></span>
+<span style="font-size: 14px; line-height: 1.45; color: var(--body);"><b style="color: var(--text); font-weight: 600;">Números divergentes</b><br>valores diferentes conforme a origem</span>
+</div>
+<div style="flex: 1 1 210px; min-width: 0; padding: 10px 14px; border-radius: 12px; background: #221923; border: 1px solid #4A2D40; display: flex; gap: 10px; align-items: flex-start;">
+<span style="flex: none; margin-top: 6px; width: 7px; height: 7px; border-radius: 50%; background: #E67AAE;"></span>
+<span style="font-size: 14px; line-height: 1.45; color: var(--body);"><b style="color: var(--text); font-weight: 600;">Risco regulatório</b><br>prazo legal e cobertura incompleta</span>
+</div>
+<div style="flex: 1 1 210px; min-width: 0; padding: 10px 14px; border-radius: 12px; background: #221923; border: 1px solid #4A2D40; display: flex; gap: 10px; align-items: flex-start;">
+<span style="flex: none; margin-top: 6px; width: 7px; height: 7px; border-radius: 50%; background: #E67AAE;"></span>
+<span style="font-size: 14px; line-height: 1.45; color: var(--body);"><b style="color: var(--text); font-weight: 600;">Novo software regulatório</b><br>alimentado pelas sete fontes</span>
+</div>
+</div>
+</section>
+
+<section style="padding: 24px 0 0; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px;">
+<h2 style="margin: 0; font-size: 22px; line-height: 1.2; font-weight: 600; letter-spacing: -0.04em;">O resultado</h2>
+<span aria-hidden="true" style="width: 22px; height: 1px; background: var(--dash2);"></span>
+<span style="font-size: 15px; line-height: 1.4; color: var(--text2);">Dados diários e confiáveis</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 14px;">
+<div style="flex: 1 1 220px; min-width: 0; padding: 10px 14px; border-radius: 12px; background: #15211F; border: 1px solid #284A44; display: flex; flex-direction: column; gap: 2px;">
+<span style="font-size: 22px; line-height: 1.2; font-weight: 600; letter-spacing: -0.03em; color: var(--teal);">−80% de tempo</span>
+<span style="font-size: 13px; line-height: 1.4; color: var(--text2);">para disponibilizar dados validados</span>
+</div>
+<div style="flex: 1 1 220px; min-width: 0; padding: 10px 14px; border-radius: 12px; background: #15211F; border: 1px solid #284A44; display: flex; flex-direction: column; gap: 2px;">
+<span style="font-size: 22px; line-height: 1.2; font-weight: 600; letter-spacing: -0.03em; color: var(--teal);">2 domínios</span>
+<span style="font-size: 13px; line-height: 1.4; color: var(--text2);">liquidez e enquadramento na mesma camada Gold; antes, só liquidez</span>
+</div>
+<div style="flex: 1 1 220px; min-width: 0; padding: 10px 14px; border-radius: 12px; background: #15211F; border: 1px solid #284A44; display: flex; flex-direction: column; gap: 2px;">
+<span style="font-size: 22px; line-height: 1.2; font-weight: 600; letter-spacing: -0.03em; color: var(--teal);">7 fontes</span>
+<span style="font-size: 13px; line-height: 1.4; color: var(--text2);">integradas em uma única base validada</span>
+</div>
+<div style="flex: 1 1 220px; min-width: 0; padding: 10px 14px; border-radius: 12px; background: #15211F; border: 1px solid #284A44; display: flex; flex-direction: column; gap: 2px;">
+<span style="font-size: 22px; line-height: 1.2; font-weight: 600; letter-spacing: -0.03em; color: var(--teal);">Conformidade</span>
+<span style="font-size: 13px; line-height: 1.4; color: var(--text2);">requisitos regulatórios atendidos no prazo</span>
+</div>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--body); text-align: justify; hyphens: auto;">Reduzimos de <b style="color: var(--text); font-weight: 600;">uma semana para um dia</b> a disponibilização de dados validados de liquidez e enquadramento, para análises e para o software regulatório, ampliando a cobertura e atendendo aos requisitos regulatórios no prazo, ao integrar sete fontes em um lakehouse na AWS com testes de qualidade automatizados. Na prática, isso reduziu o risco de multas regulatórias onerosas.</p>
+</section>
+
+<section style="padding: 24px 0 0; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px;">
+<h2 style="margin: 0; font-size: 22px; line-height: 1.2; font-weight: 600; letter-spacing: -0.04em;">A solução</h2>
+<span aria-hidden="true" style="width: 22px; height: 1px; background: var(--dash2);"></span>
+<span style="font-size: 15px; line-height: 1.4; color: var(--text2);">Lakehouse medalhão na AWS</span>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--body); text-align: justify; hyphens: auto;">As fontes foram agrupadas por padrão de ingestão, não uma a uma: jobs do Glue para os bancos e para o legado de grande volume, Lambdas para os dados de mercado e os arquivos XML. Tudo chega à Bronze; o dbt sobre o Athena constrói Silver e Gold com testes de qualidade, e um job do Glue carrega a Gold no sistema de controle e relatórios. O Airflow orquestra o conjunto, CloudWatch e SNS avisam quando algo falha e o Terraform provisiona a infraestrutura.</p>
+<figure aria-label="Diagrama de arquitetura da Risk and Liquidity Platform" style="margin: 0; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; background: #12131B;">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--hero);">
+<div style="display: flex; align-items: center; gap: 12px;">
+<span style="display: flex; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #FF5F57;"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #FEBC2E;"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #28C840;"></span></span>
+<span style="font-family: 'Geist Mono', monospace; font-size: 12px; color: var(--text2);">risk-liquidity-architecture.drawio</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px; font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--text3);">
+<span style="padding: 3px 8px; border: 1px solid var(--border3); border-radius: 6px;">AWS</span>
+<span style="padding: 3px 8px; border: 1px solid var(--border3); border-radius: 6px;">100%</span>
+</div>
+</div>
+<div class="dgrid" style="overflow-x: auto; padding: 24px 0;">
+<div style="position: relative; width: 1328px; height: 520px; margin: 0 auto;">
+<div style="position: absolute; left: 176px; top: 42px; width: 968px; height: 462px; box-sizing: border-box; border: 1.5px dashed #FF9900; border-radius: 14px; background: rgba(255,153,0,0.03);"></div>
+<div style="position: absolute; left: 392px; top: 180px; width: 584px; height: 88px; box-sizing: border-box; border: 1px solid #3A3550; border-radius: 12px; background: rgba(191,165,255,0.05);"></div>
+<div style="position: absolute; left: 1160px; top: 148px; width: 160px; height: 136px; box-sizing: border-box; border: 1px dashed #6B6E85; border-radius: 12px; background: rgba(255,255,255,0.02);"></div>
+<svg width="16" height="60" viewBox="0 0 16 60" style="position: absolute; left: 156px; top: 34px; width: 16px; height: 60px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 4 4 L 12 4 L 12 56"></path></svg>
+<svg width="16" height="60" viewBox="0 0 16 60" style="position: absolute; left: 156px; top: 86px; width: 16px; height: 60px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 4 56 L 12 56 L 12 4"></path></svg>
+<svg width="39" height="8" viewBox="0 0 39 8" style="position: absolute; left: 156px; top: 86px; width: 39px; height: 8px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-1003" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#7C7F96" stroke="none" style="stroke: none; fill: #7C7F96; fill: context-stroke"/></marker></defs><path d="M 4 4 L 31 4" marker-end="url(#dc-arrow-head-filled-1003)"></path></svg>
+<svg width="39" height="8" viewBox="0 0 39 8" style="position: absolute; left: 156px; top: 198px; width: 39px; height: 8px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-1004" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#7C7F96" stroke="none" style="stroke: none; fill: #7C7F96; fill: context-stroke"/></marker></defs><path d="M 4 4 L 31 4" marker-end="url(#dc-arrow-head-filled-1004)"></path></svg>
+<svg width="39" height="8" viewBox="0 0 39 8" style="position: absolute; left: 156px; top: 250px; width: 39px; height: 8px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-1005" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#7C7F96" stroke="none" style="stroke: none; fill: #7C7F96; fill: context-stroke"/></marker></defs><path d="M 4 4 L 31 4" marker-end="url(#dc-arrow-head-filled-1005)"></path></svg>
+<svg width="39" height="8" viewBox="0 0 39 8" style="position: absolute; left: 156px; top: 302px; width: 39px; height: 8px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-1006" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#7C7F96" stroke="none" style="stroke: none; fill: #7C7F96; fill: context-stroke"/></marker></defs><path d="M 4 4 L 31 4" marker-end="url(#dc-arrow-head-filled-1006)"></path></svg>
+<svg width="39" height="8" viewBox="0 0 39 8" style="position: absolute; left: 156px; top: 354px; width: 39px; height: 8px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-1007" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#7C7F96" stroke="none" style="stroke: none; fill: #7C7F96; fill: context-stroke"/></marker></defs><path d="M 4 4 L 31 4" marker-end="url(#dc-arrow-head-filled-1007)"></path></svg>
+<svg width="20" height="8" viewBox="0 0 20 8" style="position: absolute; left: 348px; top: 86px; width: 20px; height: 8px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 4 4 L 16 4"></path></svg>
+<svg width="20" height="8" viewBox="0 0 20 8" style="position: absolute; left: 348px; top: 198px; width: 20px; height: 8px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 4 4 L 16 4"></path></svg>
+<svg width="20" height="8" viewBox="0 0 20 8" style="position: absolute; left: 348px; top: 250px; width: 20px; height: 8px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 4 4 L 16 4"></path></svg>
+<svg width="20" height="8" viewBox="0 0 20 8" style="position: absolute; left: 348px; top: 302px; width: 20px; height: 8px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 4 4 L 16 4"></path></svg>
+<svg width="20" height="8" viewBox="0 0 20 8" style="position: absolute; left: 348px; top: 354px; width: 20px; height: 8px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 4 4 L 16 4"></path></svg>
+<svg width="8" height="276" viewBox="0 0 8 276" style="position: absolute; left: 360px; top: 86px; width: 8px; height: 276px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M 4 4 L 4 272"></path></svg>
+<svg width="47" height="8" viewBox="0 0 47 8" style="position: absolute; left: 360px; top: 220px; width: 47px; height: 8px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-1101" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#7C7F96" stroke="none" style="stroke: none; fill: #7C7F96; fill: context-stroke"/></marker></defs><path d="M 4 4 L 39 4" marker-end="url(#dc-arrow-head-filled-1101)"></path></svg>
+<svg width="47" height="8" viewBox="0 0 47 8" style="position: absolute; left: 560px; top: 220px; width: 47px; height: 8px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-1102" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#7C7F96" stroke="none" style="stroke: none; fill: #7C7F96; fill: context-stroke"/></marker></defs><path d="M 4 4 L 39 4" marker-end="url(#dc-arrow-head-filled-1102)"></path></svg>
+<svg width="47" height="8" viewBox="0 0 47 8" style="position: absolute; left: 760px; top: 220px; width: 47px; height: 8px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-1103" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#7C7F96" stroke="none" style="stroke: none; fill: #7C7F96; fill: context-stroke"/></marker></defs><path d="M 4 4 L 39 4" marker-end="url(#dc-arrow-head-filled-1103)"></path></svg>
+<svg width="47" height="8" viewBox="0 0 47 8" style="position: absolute; left: 960px; top: 220px; width: 47px; height: 8px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-1104" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#7C7F96" stroke="none" style="stroke: none; fill: #7C7F96; fill: context-stroke"/></marker></defs><path d="M 4 4 L 39 4" marker-end="url(#dc-arrow-head-filled-1104)"></path></svg>
+<svg width="47" height="8" viewBox="0 0 47 8" style="position: absolute; left: 1124px; top: 220px; width: 47px; height: 8px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-1018" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#7C7F96" stroke="none" style="stroke: none; fill: #7C7F96; fill: context-stroke"/></marker></defs><path d="M 4 4 L 39 4" marker-end="url(#dc-arrow-head-filled-1018)"></path></svg>
+<svg width="55" height="8" viewBox="0 0 55 8" style="position: absolute; left: 740px; top: 450px; width: 55px; height: 8px; overflow: visible; fill: none; stroke: #7C7F96; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-1019" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#7C7F96" stroke="none" style="stroke: none; fill: #7C7F96; fill: context-stroke"/></marker></defs><path d="M 4 4 L 47 4" marker-end="url(#dc-arrow-head-filled-1019)"></path></svg>
+<div style="position: absolute; left: 8px; top: 16px; width: 152px; height: 44px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25);"><img src="../assets/aws-aurora.png" alt="" style="flex: none; width: 36px; height: 36px; border-radius: 9px;"><span><b style="color: #EDEEF3; font-weight: 600;">Aurora</b><br>operacional</span></div>
+<div style="position: absolute; left: 8px; top: 68px; width: 152px; height: 44px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25);"><span class="ic ic-postgres" style="flex: none; box-shadow: none;"></span><span><b style="color: #EDEEF3; font-weight: 600;">PostgreSQL</b><br>interno</span></div>
+<div style="position: absolute; left: 8px; top: 120px; width: 152px; height: 44px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25);"><span class="ic ic-sqlserver" style="flex: none; box-shadow: none;"></span><span><b style="color: #EDEEF3; font-weight: 600;">SQL Server</b><br>liquidez</span></div>
+<div style="position: absolute; left: 8px; top: 180px; width: 152px; height: 44px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25);"><span class="ic ic-sqlserver" style="flex: none; box-shadow: none;"></span><span><b style="color: #EDEEF3; font-weight: 600;">SQL Server</b><br>enquadramento</span></div>
+<div style="position: absolute; left: 8px; top: 232px; width: 152px; height: 44px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25);"><svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36" style="flex: none;"><rect width="36" height="36" rx="9" fill="#F4F4F6"></rect><text x="18" y="22.5" text-anchor="middle" font-family="Geist, sans-serif" font-size="13" font-weight="700" fill="#1B1C24">B3</text></svg><span><b style="color: #EDEEF3; font-weight: 600;">B3</b><br>carga diária</span></div>
+<div style="position: absolute; left: 8px; top: 284px; width: 152px; height: 44px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25);"><svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36" style="flex: none;"><rect width="36" height="36" rx="9" fill="#F4F4F6"></rect><text x="18" y="22" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10.5" font-weight="700" fill="#E5622A">&lt;/&gt;</text><text x="18" y="31" text-anchor="middle" font-family="Geist, sans-serif" font-size="7" font-weight="700" fill="#1B1C24">XML</text></svg><span><b style="color: #EDEEF3; font-weight: 600;">XML</b><br>internos</span></div>
+<div style="position: absolute; left: 8px; top: 336px; width: 152px; height: 44px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25);"><svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36" style="flex: none;"><rect width="36" height="36" rx="9" fill="#F4F4F6"></rect><text x="18" y="22" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10.5" font-weight="700" fill="#E5622A">&lt;/&gt;</text><text x="18" y="31" text-anchor="middle" font-family="Geist, sans-serif" font-size="7" font-weight="700" fill="#1B1C24">XML</text></svg><span><b style="color: #EDEEF3; font-weight: 600;">XML</b><br>externos</span></div>
+<div style="position: absolute; left: 192px; top: 68px; width: 160px; height: 44px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25);"><img src="../assets/aws-glue.png" alt="" style="flex: none; width: 36px; height: 36px; border-radius: 9px;"><span><b style="color: #EDEEF3; font-weight: 600;">Glue job</b><br>Volume em GB</span></div>
+<div style="position: absolute; left: 192px; top: 180px; width: 160px; height: 44px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25);"><img src="../assets/aws-glue.png" alt="" style="flex: none; width: 36px; height: 36px; border-radius: 9px;"><span><b style="color: #EDEEF3; font-weight: 600;">Glue job</b><br>Volume em TB</span></div>
+<div style="position: absolute; left: 192px; top: 232px; width: 160px; height: 44px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25);"><img src="../assets/aws-lambda.png" alt="" style="flex: none; width: 36px; height: 36px; border-radius: 9px;"><span><b style="color: #EDEEF3; font-weight: 600;">Lambda</b><br>B3 diária</span></div>
+<div style="position: absolute; left: 192px; top: 284px; width: 160px; height: 44px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25);"><img src="../assets/aws-lambda.png" alt="" style="flex: none; width: 36px; height: 36px; border-radius: 9px;"><span><b style="color: #EDEEF3; font-weight: 600;">Lambda</b><br>XML internos</span></div>
+<div style="position: absolute; left: 192px; top: 336px; width: 160px; height: 44px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25);"><img src="../assets/aws-lambda.png" alt="" style="flex: none; width: 36px; height: 36px; border-radius: 9px;"><span><b style="color: #EDEEF3; font-weight: 600;">Lambda</b><br>XML externos</span></div>
+<div style="position: absolute; left: 404px; top: 192px; width: 160px; height: 64px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25); border-left: 4px solid #CD8A4A;"><img src="../assets/aws-s3.png" alt="" style="flex: none; width: 36px; height: 36px; border-radius: 9px;"><span><b style="color: #EDEEF3; font-weight: 600;">Bronze</b><br>bruto, imutável</span></div>
+<div style="position: absolute; left: 604px; top: 192px; width: 160px; height: 64px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25); border-left: 4px solid #AEB6C4;"><img src="../assets/aws-s3.png" alt="" style="flex: none; width: 36px; height: 36px; border-radius: 9px;"><span><b style="color: #EDEEF3; font-weight: 600;">Silver</b><br>limpo e testado</span></div>
+<div style="position: absolute; left: 804px; top: 192px; width: 160px; height: 64px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25); border-left: 4px solid #E3B341;"><img src="../assets/aws-s3.png" alt="" style="flex: none; width: 36px; height: 36px; border-radius: 9px;"><span><b style="color: #EDEEF3; font-weight: 600;">Gold</b><br>posições e analytics</span></div>
+<div style="position: absolute; left: 1004px; top: 202px; width: 124px; height: 44px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25);"><img src="../assets/aws-glue.png" alt="" style="flex: none; width: 36px; height: 36px; border-radius: 9px;"><span><b style="color: #EDEEF3; font-weight: 600;">Glue job</b><br>Load</span></div>
+<div style="position: absolute; left: 1168px; top: 196px; width: 144px; height: 56px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25);"><span class="ic ic-sqlserver" style="flex: none; box-shadow: none;"></span><span><b style="color: #EDEEF3; font-weight: 600;">SQL Server</b><br>controle e relatórios</span></div>
+<div style="position: absolute; left: 392px; top: 328px; width: 584px; height: 48px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25); border-color: #2F6B62; background: #122321;"><img src="../assets/aws-athena.png" alt="" style="flex: none; width: 36px; height: 36px; border-radius: 9px;"><span class="ic ic-dbt" style="flex: none; box-shadow: none;"></span><span><b style="color: #EDEEF3; font-weight: 600;">Athena + dbt</b> · transformações e testes de qualidade em todas as camadas; dado inválido não avança</span></div>
+<div style="position: absolute; left: 192px; top: 430px; width: 552px; height: 48px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25); border-color: #5A4E7A; background: #1C1A2B;"><span class="ic ic-airflow" style="flex: none; box-shadow: none;"></span><span><b style="color: #EDEEF3; font-weight: 600;">Airflow</b> · orquestra todas as cargas e transformações, reprocessa por data de referência e alerta falhas</span></div>
+<div style="position: absolute; left: 792px; top: 430px; width: 336px; height: 48px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #191B27; border: 1px solid #34364A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25); border-color: #7A3D62; background: #2A1A26;"><img src="../assets/aws-cloudwatch.png" alt="" style="flex: none; width: 36px; height: 36px; border-radius: 9px;"><img src="../assets/aws-sns.png" alt="" style="flex: none; width: 36px; height: 36px; border-radius: 9px;"><span><b style="color: #EDEEF3; font-weight: 600;">CloudWatch + SNS</b><br>logs e alerta da etapa com falha</span></div>
+<div style="position: absolute; left: 936px; top: 54px; width: 192px; height: 44px; box-sizing: border-box; padding: 0 10px; display: flex; align-items: center; gap: 8px; background: #1C1A2B; border: 1px solid #5A4E7A; border-radius: 10px; font-size: 13px; line-height: 17px; color: #C4C7D4; box-shadow: 0 6px 16px rgba(0,0,0,.25);"><span class="ic ic-terraform" style="flex: none; box-shadow: none;"></span><span>infra via <b style="color: #EDEEF3; font-weight: 600;">Terraform</b></span></div>
+<div style="position: absolute; left: 184px; top: 22px; font-family: 'Geist Mono', monospace; font-size: 11px; line-height: 16px; letter-spacing: 0.1em; color: #FFB547;">AWS CLOUD</div>
+<div style="position: absolute; left: 400px; top: 158px; display: flex; align-items: center; gap: 8px; font-family: 'Geist Mono', monospace; font-size: 11px; line-height: 16px; letter-spacing: 0.08em; color: #C9B8FF;">LAKEHOUSE · S3 + ICEBERG · MEDALHÃO</div>
+<div style="position: absolute; left: 1170px; top: 158px; font-family: 'Geist Mono', monospace; font-size: 11px; line-height: 16px; font-size: 10px; letter-spacing: 0.08em; color: #A9ADBD;">SISTEMA DE TERCEIROS</div>
+<div style="position: absolute; left: 400px; top: 308px; font-family: 'Geist Mono', monospace; font-size: 11px; line-height: 16px; letter-spacing: 0.1em; color: #7FD8CA;">TRANSFORM + DATA QUALITY</div>
+<div style="position: absolute; left: 200px; top: 408px; font-family: 'Geist Mono', monospace; font-size: 11px; line-height: 16px; letter-spacing: 0.1em; color: #C9B8FF;">ORQUESTRAÇÃO</div>
+<div style="position: absolute; left: 800px; top: 408px; font-family: 'Geist Mono', monospace; font-size: 11px; line-height: 16px; letter-spacing: 0.1em; color: #F58AC0;">OBSERVABILIDADE</div>
+<div style="position: absolute; left: 568px; top: 196px; width: 32px; text-align: center; font-family: 'Geist Mono', monospace; font-size: 11px; line-height: 16px; color: #A9ADBD;">dbt</div>
+<div style="position: absolute; left: 768px; top: 196px; width: 32px; text-align: center; font-family: 'Geist Mono', monospace; font-size: 11px; line-height: 16px; color: #A9ADBD;">dbt</div>
+<div style="position: absolute; left: 744px; top: 426px; width: 48px; text-align: center; font-family: 'Geist Mono', monospace; font-size: 11px; line-height: 16px; color: #A9ADBD;">falha</div>
+</div>
+</div>
+<figcaption style="display: flex; flex-wrap: wrap; gap: 8px 22px; padding: 12px 16px; border-top: 1px solid var(--line); background: var(--hero); font-size: 12px; color: var(--text3);">
+<span style="display: flex; align-items: center; gap: 8px;"><span style="width: 20px; height: 0; border-top: 2px solid #7C7F96;"></span>fluxo de dados</span>
+
+<span style="display: flex; align-items: center; gap: 8px;"><span style="width: 16px; height: 12px; border: 1.5px dashed #FF9900; border-radius: 3px;"></span>limite da conta AWS</span>
+</figcaption>
+</figure>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; margin-top: 8px;">
+<div style="flex: 1 1 250px; min-width: 0; border-top: 2px solid var(--accent); padding-top: 12px; display: flex; flex-direction: column; gap: 6px;">
+<h3 style="margin: 0; font-size: 16px; font-weight: 600; letter-spacing: -0.02em;">Ingestão por padrão</h3>
+<p style="margin: 0; font-size: 14px; line-height: 1.55; color: var(--body);">Três padrões de ingestão cobrem as sete fontes. Uma fonte nova entra reaproveitando um padrão, sem código novo do zero.</p>
+</div>
+<div style="flex: 1 1 250px; min-width: 0; border-top: 2px solid var(--accent); padding-top: 12px; display: flex; flex-direction: column; gap: 6px;">
+<h3 style="margin: 0; font-size: 16px; font-weight: 600; letter-spacing: -0.02em;">Medalhão com Iceberg</h3>
+<p style="margin: 0; font-size: 14px; line-height: 1.55; color: var(--body);">A Bronze guarda o dado como chegou, permitindo auditar e recalcular qualquer dia. O Iceberg garante sobrescrita segura por partição.</p>
+</div>
+<div style="flex: 1 1 250px; min-width: 0; border-top: 2px solid var(--accent); padding-top: 12px; display: flex; flex-direction: column; gap: 6px;">
+<h3 style="margin: 0; font-size: 16px; font-weight: 600; letter-spacing: -0.02em;">Qualidade como portão</h3>
+<p style="margin: 0; font-size: 14px; line-height: 1.55; color: var(--body);">Testes do dbt bloqueiam a promoção entre camadas. Dado inválido não chega a quem consome: fica em quarentena para análise.</p>
+</div>
+<div style="flex: 1 1 250px; min-width: 0; border-top: 2px solid var(--accent); padding-top: 12px; display: flex; flex-direction: column; gap: 6px;">
+<h3 style="margin: 0; font-size: 16px; font-weight: 600; letter-spacing: -0.02em;">Operação previsível</h3>
+<p style="margin: 0; font-size: 14px; line-height: 1.55; color: var(--body);">Reprocessamento idempotente por data de referência no Airflow, com alerta da etapa exata que falhou.</p>
+</div>
+</div>
+<p style="margin: 6px 0 0; font-size: 13px; line-height: 1.6; color: var(--text3);">Reconstrução modernizada de um projeto real, com dados fictícios.</p>
+</section>
+
+<nav aria-label="Navegação entre cases" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+<a href="../index.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; text-decoration: none; color: var(--text2);">← Todos os projetos</a>
+</nav>
+</main>
+
+</div>
+</div>
+</body>
+</html>

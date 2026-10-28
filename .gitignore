@@ -1,8 +1,4 @@
+.DS_Store
+.screenshots/
+portfolio-anderson.zip
 node_modules/
-dist/
-.astro/
-test-results/
-playwright-report/
-.env
-.env.*
-!.env.example
