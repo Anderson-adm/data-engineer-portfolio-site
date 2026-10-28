@@ -1,0 +1,14 @@
+---
+import type { Project } from '../data/projects';
+import { local } from '../lib/links';
+import type { TechnologyName } from '../data/technologies';
+import Icon from './Icon.astro';
+import TechIcon from './TechIcon.astro';
+interface Props { project: Project; }
+const { project } = Astro.props;
+const posterIcons: Record<Project['visual'], TechnologyName[]> = { network: ['Python', 'SQL', 'AWS'], lake: ['S3', 'Athena', 'SQL'], event: ['Lambda', 'Python', 'AWS'] };
+---
+<article class:list={['project-card', project.visual]}>
+  <div class="project-poster" aria-hidden="true"><span class="poster-number">{project.number}</span><svg class="poster-line" viewBox="0 0 360 80" fill="none"><path d="M0 56h65l30-28h63l28 26h68l30-28h76" stroke="currentColor" stroke-width="1" stroke-dasharray="3 5" /></svg><div class="poster-technologies">{posterIcons[project.visual].map(name => <TechIcon name={name} />)}</div><span class="poster-symbol"><Icon kind={project.visual === 'network' ? 'branch' : project.visual === 'lake' ? 'layers' : 'code'} /></span></div>
+  <div class="project-content"><span class:list={['status', { active: project.active }]}><span></span>{project.status}</span><h3><a href={local(`projetos/${project.slug}/`)}>{project.shortTitle}</a></h3><p>{project.summary}</p><a class="case-link" href={local(`projetos/${project.slug}/`)} aria-label={`Conhecer o case ${project.number}: ${project.title}`}>Conhecer o case <Icon kind="diagonal" /></a></div>
+</article>

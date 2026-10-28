@@ -1,0 +1,51 @@
+name: Publish to GitHub Pages (manual)
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_publish:
+        description: 'Publicar esta versão no GitHub Pages?'
+        required: true
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    if: inputs.confirm_publish && vars.PAGES_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL: ${{ vars.SITE_URL }}
+      BASE_PATH: ${{ vars.BASE_PATH }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Require real hosting configuration
+        run: |
+          test -n "$SITE_URL" || { echo 'Configure SITE_URL'; exit 1; }
+          test -n "$BASE_PATH" || { echo 'Configure BASE_PATH'; exit 1; }
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test:links
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment
