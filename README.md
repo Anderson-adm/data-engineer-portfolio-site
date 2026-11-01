@@ -52,8 +52,8 @@ Configuração única no GitHub: **Settings → Pages → Source: GitHub Actions
 
 ## Pendências
 
-- **Links "Código"**: removidos dos cards e do case 01 até existirem repositórios públicos.
-  Ao criar, adicionar com `target="_blank" rel="noopener noreferrer"`.
+- **Links "Código"**: o card 01 e o case 01 apontam para
+  https://github.com/Anderson-adm/enterprise-risk-liquidity. Cards 02 e 03 ainda sem repositório.
 - **Cards 02 e 03** (Financial Data Lake, Event-Driven Integration): exibem o selo
   "Em desenvolvimento" no lugar do resultado. Voltar o box "RESULTADO" quando houver números reais.
 - **Cases 02 e 03**: páginas ainda não existem. Ao criar, reativar "Conhecer o case ↗" nos cards e o
