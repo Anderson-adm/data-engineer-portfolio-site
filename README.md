@@ -36,6 +36,10 @@ Todo push na `main` dispara o workflow **Deploy no GitHub Pages**
 
 Configuração única no GitHub: **Settings → Pages → Source: GitHub Actions**.
 
+O deploy também acrescenta `?v=<hash>` a cada link para `assets/` (cache busting). Para trocar o
+currículo, a foto ou qualquer imagem, basta substituir o arquivo mantendo o mesmo nome e fazer o
+push: o link muda sozinho e ninguém recebe a versão antiga do cache.
+
 ## Onde editar cada conteúdo
 
 | Conteúdo | Onde |

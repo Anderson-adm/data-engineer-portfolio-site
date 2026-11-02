@@ -32,6 +32,27 @@ jobs:
           mkdir _site
           cp -r index.html cases assets robots.txt sitemap.xml .nojekyll _site/
 
+      # Acrescenta ?v=<hash do arquivo> a cada link para assets/ nas páginas.
+      # Quando um arquivo muda (ex.: currículo), o link muda junto e nenhum
+      # navegador ou o LinkedIn reaproveita a versão antiga em cache.
+      - name: Versionar arquivos (cache busting)
+        run: |
+          python3 - <<'PY'
+          import hashlib, pathlib, re
+          site = pathlib.Path("_site")
+          versions = {
+              p.name: hashlib.sha256(p.read_bytes()).hexdigest()[:8]
+              for p in (site / "assets").iterdir() if p.is_file()
+          }
+          for html in site.rglob("*.html"):
+              text = html.read_text(encoding="utf-8")
+              for name, v in versions.items():
+                  pattern = r"(assets/" + re.escape(name) + r")(\?v=[0-9a-f]+)?(?![\w.-])"
+                  text = re.sub(pattern, r"\g<1>?v=" + v, text)
+              html.write_text(text, encoding="utf-8")
+              print("versionado:", html)
+          PY
+
       - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
